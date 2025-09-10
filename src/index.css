@@ -1,1 +1,19 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Troy Sans";
+  src: url("./assets/troy-sans.otf") format("otf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme {
+  --color-primaryBrown: #8d765b;
+  --color-secondaryBrown: #ad9476;
+  --color-primaryNude: #bdac96;
+  --color-lightNude: #e0d5bf;
+  --color-lighterNude: #efe9db;
+
+  --font-header: "Troy Sans", "Source Sans 3", "sans-serif";
+  --font-body: "Source Sans 3", "sans-serif";
+}
