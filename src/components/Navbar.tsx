@@ -32,7 +32,7 @@ export default function Navbar() {
     setMenuOpen((prev) => !prev);
   }
   return (
-    <nav className="sticky font-body w-full flex flex-col md:flex-row items-center justify-between px-8 lg:px-16 py-4 bg-lighterNude text-primaryBrown font-semibold text-lg">
+    <nav className="sticky top-0 left-0 font-body w-full flex flex-col md:flex-row items-center justify-between px-8 lg:px-16 py-4 bg-lighterNude text-primaryBrown font-semibold text-lg">
       <div className="flex items-center justify-between md:w-auto w-full">
         {/* Logo */}
         <Logo />
