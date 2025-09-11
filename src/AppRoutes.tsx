@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+import Banner from "./components/Banner";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 // import NotFound from "./pages/NotFound";
@@ -21,6 +22,7 @@ function AppRoutes() {
 
   return (
     <>
+      {!hideLayout && <Banner />}
       {!hideLayout && <Navbar />}
       <Routes>
         <Route path="/" element={<Homepage />} />
