@@ -1,5 +1,6 @@
 import BackgroundImage from "../assets/trinidad and tobago.jpg";
 import useCountdown from "../hooks/useCountdown";
+import Button from "./Button";
 import CountdownIcon from "./CountdownIcon";
 
 export default function Banner() {
@@ -28,7 +29,7 @@ export default function Banner() {
 
       {/* Countdown Container */}
       <div className="z-10 flex flex-col items-center justify-center bg-primaryBrown/80 gap-3 px-6 py-6 rounded-2xl">
-        <h1 className="text-center uppercase font-bold text-xl tracking-widest">
+        <h1 className="text-center uppercase font-bold lg:text-xl tracking-widest">
           {/* Date */}
           <span>25th December, 2025</span>
 
@@ -38,9 +39,12 @@ export default function Banner() {
         </h1>
 
         {/* CTA */}
-        <button className="bg-white px-6 py-1.5 rounded-lg text-xl text-secondaryBrown font-semibold">
-          Reserve Your Spot Now!
-        </button>
+        <Button
+          title="Reserve Your Spot Now!"
+          url="/contact"
+          backgroundColor="white"
+          textColor="primaryBrown"
+        />
 
         {/* Countdown */}
         <div className="flex justify-between items-center gap-2">

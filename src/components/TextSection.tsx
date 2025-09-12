@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
 import type { TextSection as TextSectionProps } from "../types/globals";
+import Button from "./Button";
 export default function TextSection({
   title,
   description,
-  button,
   image,
   textColor,
   textLocation,
+  imageDirection,
+  cta,
 }: TextSectionProps) {
   return (
     <section
@@ -22,22 +23,19 @@ export default function TextSection({
       >
         <h1 className="text-2xl md:text-5xl font-semibold">{title}</h1>
         <article className="md:text-xl">{description}</article>
-        <Link
-          to="/"
-          className="text-sm md:text-base bg-white rounded-lg text-primaryBrown font-semibold px-6 py-1.5"
-        >
-          {button}
-        </Link>
+        {cta && <Button {...cta} />}
       </div>
 
       {/* Image */}
       <img
         src={image}
         alt=""
-        className={`hidden md:block absolute h-4/5 lg:w-1/5 lg:h-auto bottom-0  ${
+        className={`hidden md:block absolute h-4/5 lg:w-1/5 lg:h-auto bottom-0 ${
+          imageDirection === "left" && "scale-x-[-1]"
+        }  ${
           textLocation === "left"
-            ? "right-0 mr-8 lg:mr-16 scale-x-[-1]"
-            : "left-0 ml-16 lg:ml-32 scale-x-[-1]"
+            ? "right-0 mr-8 lg:mr-16"
+            : "left-0 ml-16 lg:ml-32"
         }`}
       />
     </section>

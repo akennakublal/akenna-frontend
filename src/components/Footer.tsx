@@ -38,13 +38,13 @@ export default function Footer() {
 
       {/* Links */}
       <div className="flex gap-4 sm:gap-8 text-center">
-        <Link to="/" className="hover:underline">
+        <Link to="/about" className="hover:underline">
           About Me
         </Link>
-        <Link to="/" className="hover:underline">
+        <Link to="/contact" className="hover:underline">
           Contact Me
         </Link>
-        <Link to="/" className="hover:underline">
+        <Link to="/speaking" className="hover:underline">
           Speaking
         </Link>
         <Link to="/" className="hover:underline">

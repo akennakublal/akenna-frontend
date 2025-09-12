@@ -4,6 +4,7 @@ import { InlineIcon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import type { DropdownLink as DropdownLinkType } from "../types/globals";
 import DropdownLink from "./DropdownLink";
+import Button from "./Button";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -54,19 +55,19 @@ export default function Navbar() {
         } flex flex-col lg:flex-row lg:justify-start justify-center items-center gap-2 lg:gap-8 xl:gap-16 transition-all duration-500 text-center text-sm lg:text-base xl:text-xl`}
       >
         <Link
-          to="/"
+          to="/about"
           className="px-4 py-2 rounded-2xl transition-200 hover:bg-lightNude"
         >
           About Me
         </Link>
         <Link
-          to="/"
+          to="/contact"
           className="px-4 py-2 rounded-2xl transition-200 hover:bg-lightNude"
         >
           Contact Me
         </Link>
         <Link
-          to="/"
+          to="/speaking"
           className="px-4 py-2 rounded-2xl transition-200 hover:bg-lightNude"
         >
           Speaking
@@ -79,9 +80,13 @@ export default function Navbar() {
       </div>
 
       {/* CTA */}
-      <button className="hidden lg:block bg-primaryBrown  px-6 py-1.5 rounded-lg text-white text-sm xl:text-lg font-semibold">
-        Book a Session
-      </button>
+      <Button
+        title="Book a Session"
+        url="/contact"
+        backgroundColor="primaryBrown"
+        textColor="white"
+        otherStyles="hidden lg:block"
+      />
     </nav>
   );
 }
