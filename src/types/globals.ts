@@ -17,11 +17,11 @@ export type SocialLink = {
 export type TextSection = {
   title: string;
   description: string;
-  button: string;
-  flexReversed: boolean;
   textColor: string;
   textLocation: "left" | "right";
+  imageDirection: "left" | "right";
   image: string;
+  cta?: Button;
 };
 
 export type CustomColors =
@@ -30,3 +30,16 @@ export type CustomColors =
   | "primaryNude"
   | "lightNude"
   | "lighterNude";
+
+export type Event = {
+  title: string;
+  subtitle: string;
+  date: string;
+};
+
+export type Button = {
+  title: string;
+  url?: string | null;
+  backgroundColor: CustomColors | "white" | "black" | "transparent";
+  textColor: CustomColors | "white" | "black";
+};
