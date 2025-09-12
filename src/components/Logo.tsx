@@ -10,7 +10,7 @@ export default function Logo() {
         viewBox="0 0 400 333"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="h-16 w-16"
+        className="h-16 w-16 lg:h-20 lg:w-20"
       >
         <g clipPath="url(#clip0_55_2)">
           <path
@@ -28,7 +28,7 @@ export default function Logo() {
       </svg>
 
       {/* Text */}
-      <h1 className="flex flex-col font-header text-xl text-primaryBrown justify-center">
+      <h1 className="flex flex-col font-header text-xl xl:text-2xl text-primaryBrown justify-center">
         <span className="tracking-tighter">Akenna</span>
         <span className="tracking-tighter">Kublal</span>
       </h1>

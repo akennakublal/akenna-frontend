@@ -30,7 +30,7 @@ export default function Banner() {
       <div className="z-10 flex flex-col items-center justify-center bg-primaryBrown/80 gap-3 px-6 py-6 rounded-2xl">
         <h1 className="text-center uppercase font-bold text-xl tracking-widest">
           {/* Date */}
-          <span>29th August, 2025</span>
+          <span>25th December, 2025</span>
 
           <span> | </span>
           {/* Location */}
@@ -38,7 +38,7 @@ export default function Banner() {
         </h1>
 
         {/* CTA */}
-        <button className="bg-white px-6 py-1.5 rounded-lg text-xl text-primaryBrown font-semibold">
+        <button className="bg-white px-6 py-1.5 rounded-lg text-xl text-secondaryBrown font-semibold">
           Reserve Your Spot Now!
         </button>
 

@@ -32,12 +32,12 @@ export default function Footer() {
     },
   ];
   return (
-    <footer className="flex flex-col justify-center items-center px-16 py-8 gap-8 bg-white text-primaryBrown">
+    <footer className="flex flex-col justify-center items-center px-16 py-8 gap-8 bg-white text-primaryBrown text-sm lg:text-base">
       {/* Logo */}
       <Logo />
 
       {/* Links */}
-      <div className="flex gap-8">
+      <div className="flex gap-4 sm:gap-8 text-center">
         <Link to="/" className="hover:underline">
           About Me
         </Link>

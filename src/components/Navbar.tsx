@@ -32,8 +32,8 @@ export default function Navbar() {
     setMenuOpen((prev) => !prev);
   }
   return (
-    <nav className="sticky top-0 left-0 font-body w-full flex flex-col md:flex-row items-center justify-between px-8 lg:px-16 py-4 bg-lighterNude text-primaryBrown font-semibold text-lg">
-      <div className="flex items-center justify-between md:w-auto w-full">
+    <nav className="sticky top-0 left-0 z-99 font-body w-full flex flex-col lg:flex-row items-center justify-between px-8 xl:px-16 py-4 bg-lighterNude text-primaryBrown ">
+      <div className="flex items-center justify-between lg:w-auto w-full">
         {/* Logo */}
         <Logo />
 
@@ -42,7 +42,7 @@ export default function Navbar() {
           icon={
             menuOpen ? "line-md:menu-to-close-alt-transition" : "line-md:menu"
           }
-          className="text-2xl md:hidden transition-all"
+          className="text-2xl lg:hidden transition-all"
           onClick={toggleMenu}
         />
       </div>
@@ -50,8 +50,8 @@ export default function Navbar() {
       {/* Links */}
       <div
         className={`${
-          !menuOpen && "hidden md:flex"
-        } flex flex-col md:flex-row md:justify-start justify-center items-center gap-2 md:gap-8 lg:gap-16 transition-all duration-500`}
+          !menuOpen && "hidden lg:flex"
+        } flex flex-col lg:flex-row lg:justify-start justify-center items-center gap-2 lg:gap-8 xl:gap-16 transition-all duration-500 text-center text-sm lg:text-base xl:text-xl`}
       >
         <Link
           to="/"
@@ -79,7 +79,7 @@ export default function Navbar() {
       </div>
 
       {/* CTA */}
-      <button className="hidden md:block bg-primaryBrown  px-6 py-1.5 rounded-lg text-white font-semibold">
+      <button className="hidden lg:block bg-primaryBrown  px-6 py-1.5 rounded-lg text-white text-sm xl:text-lg font-semibold">
         Book a Session
       </button>
     </nav>
