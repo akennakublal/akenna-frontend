@@ -2,11 +2,12 @@ import { Routes, Route } from "react-router-dom";
 import Banner from "./components/Banner";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import HomePage from "./pages/Homepage";
-// import ContactPage from "./pages/ContactPage";
-// import AboutPage from "./pages/AboutPage";
-import MaintenancePage from "./pages/MaintenancePage";
-import NotFoundPage from "./pages/NotFoundPage";
+import HomePage from "./pages/Home";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Maintenance from "./pages/Maintenance";
+import NotFound from "./pages/NotFound";
+import Speaking from "./pages/Speaking";
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -31,10 +32,32 @@ function AppRoutes() {
             </Layout>
           }
         />
-        {/* <Route path="/contact-us" element={<ContactPage />} />
-        <Route path="/about-us" element={<AboutPage />} />*/}
-        <Route path="/maintenance" element={<MaintenancePage />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route
+          path="/contact"
+          element={
+            <Layout>
+              <Contact />
+            </Layout>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <Layout>
+              <About />
+            </Layout>
+          }
+        />
+        <Route
+          path="/speaking"
+          element={
+            <Layout>
+              <Speaking />
+            </Layout>
+          }
+        />
+        <Route path="/maintenance" element={<Maintenance />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
