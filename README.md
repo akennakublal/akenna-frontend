@@ -1,7 +1,7 @@
 # Personal Portfolio – Frontend
 
 This is the **frontend** for Akenna Kublal's personal portfolio website.  
-It is built with **React + Vite**, styled with **Tailwind CSS**, and deployed on **Netlify** (or Vercel).
+It is built with **React + Vite**, styled with **Tailwind CSS**, and deployed on **Netlify**.
 
 ---
 
