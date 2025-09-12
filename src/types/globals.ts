@@ -13,3 +13,20 @@ export type SocialLink = {
   url: string;
   icon: string;
 };
+
+export type TextSection = {
+  title: string;
+  description: string;
+  button: string;
+  flexReversed: boolean;
+  textColor: string;
+  textLocation: "left" | "right";
+  image: string;
+};
+
+export type CustomColors =
+  | "primaryBrown"
+  | "secondaryBrown"
+  | "primaryNude"
+  | "lightNude"
+  | "lighterNude";
