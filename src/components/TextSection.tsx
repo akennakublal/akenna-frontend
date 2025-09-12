@@ -34,7 +34,7 @@ export default function TextSection({
       <img
         src={image}
         alt=""
-        className={`hidden md:block absolute h-4/5 bottom-0  ${
+        className={`hidden md:block absolute h-4/5 lg:w-1/5 lg:h-auto bottom-0  ${
           textLocation === "left"
             ? "right-0 mr-8 lg:mr-16 scale-x-[-1]"
             : "left-0 ml-16 lg:ml-32 scale-x-[-1]"
