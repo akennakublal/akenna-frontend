@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
-function MaintenancePage() {
+export default function Maintenance() {
   const navigate = useNavigate();
 
   function goBack() {
@@ -15,10 +16,18 @@ function MaintenancePage() {
       <h1 className="text-3xl font-bold mb-4">We'll be back soon!</h1>
       <p className="text-lg">Our site is currently undergoing maintenance.</p>
 
-      <button onClick={goHome}>Go Home</button>
-      <button onClick={goBack}>Go Back</button>
+      <Button
+        onClick={goHome}
+        title="Go Home"
+        backgroundColor="primaryBrown"
+        textColor="white"
+      />
+      <Button
+        onClick={goBack}
+        title="Go Back"
+        backgroundColor="transparent"
+        textColor="primaryBrown"
+      />
     </div>
   );
 }
-
-export default MaintenancePage;
