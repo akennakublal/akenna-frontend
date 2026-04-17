@@ -4,8 +4,9 @@
 
 @font-face {
   font-family: "Troy Sans";
-  src: url("./assets/troy-sans.otf") format("otf");
+  src: url("./assets/troy-sans.otf") format("opentype");
   font-weight: 400;
+  font-display: swap;
   font-style: normal;
 }
 
