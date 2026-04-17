@@ -1,50 +1,72 @@
-import BackgroundImage from "../assets/trinidad and tobago.jpg";
 import useCountdown from "../hooks/useCountdown";
+import type { BannerContent } from "../types/globals";
 import Button from "./Button";
 import CountdownIcon from "./CountdownIcon";
+// import { IMAGE_API_URL } from "../api/strapi";
+// import { useEffect } from "react";
 
-export default function Banner() {
-  const [days, hours, minutes, seconds] = useCountdown(
-    new Date("December 25, 2025 12:00:00")
-  );
+export default function Banner({
+  title,
+  description,
+  eventDate,
+  location,
+  cta,
+  backgroundImage,
+}: BannerContent) {
+  const eventDateObj = new Date(eventDate);
+  const formattedDate = eventDateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  // const backgroundImageUrl = IMAGE_API_URL + backgroundImage.formats.medium.url;
+  const backgroundImageUrl = backgroundImage.formats.medium.url;
+  const [days, hours, minutes, seconds] = useCountdown(eventDateObj);
+
+  // useEffect(() => {
+  //   console.log("Fixed backgroundImageUrl:", backgroundImageUrl);
+  //   console.log("Image API URL:", IMAGE_API_URL);
+  //   console.log("Background image URL:", backgroundImage.formats.medium.url);
+  // }, [backgroundImageUrl, backgroundImage]);
+
   return (
-    <div className="z-10 relative bg-linear-to-r from-primaryBrown to-lighterNude flex flex-col md:flex-row px-16 py-4 justify-between items-center text-white">
+    <section
+      aria-label="Event Banner"
+      className="z-10 relative bg-linear-to-r from-primaryBrown to-lighterNude flex flex-col md:flex-row md:px-16 px-4 py-4 justify-between items-center text-white"
+    >
       {/* Background Image */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center opacity-60"
-        style={{ backgroundImage: `url(${BackgroundImage})` }}
-      ></div>
+      {backgroundImageUrl && (
+        <img
+          src={backgroundImageUrl}
+          alt=""
+          fetchPriority="high"
+          aria-hidden="true"
+          className="absolute inset-0 z-0 w-480 h-full object-cover opacity-60"
+        />
+      )}
 
       {/* Event Name and Description */}
       <div className="z-10 flex flex-col py-7 gap-3 w-full md:w-1/2">
         {/* Name */}
-        <h1 className="font-cursive text-6xl font-bold text-center md:text-left">
-          The Women's Conference
+        <h1 className="font-cursive text-5xl md:text-6xl font-bold text-center md:text-left">
+          {title}
         </h1>
-        <p className="text-center md:text-left">
-          Lorem ipsum dolor sit amet consectetur. Platea fermentum adipiscing at
-          eget habitant pretium nulla lobortis.
-        </p>
+        <p className="text-center md:text-left">{description}</p>
       </div>
 
       {/* Countdown Container */}
       <div className="z-10 flex flex-col items-center justify-center bg-primaryBrown/80 gap-3 px-6 py-6 rounded-2xl">
-        <h1 className="text-center uppercase font-bold lg:text-xl tracking-widest">
+        <h2 className="text-center uppercase font-bold lg:text-xl tracking-widest">
           {/* Date */}
-          <span>25th December, 2025</span>
+          <time>{formattedDate}</time>
 
           <span> | </span>
           {/* Location */}
-          <span>Port of Spain</span>
-        </h1>
+          <span>{location}</span>
+        </h2>
 
         {/* CTA */}
-        <Button
-          title="Reserve Your Spot Now!"
-          url="/contact"
-          backgroundColor="white"
-          textColor="primaryBrown"
-        />
+        <Button {...cta} />
 
         {/* Countdown */}
         <div className="flex justify-between items-center gap-2">
@@ -54,6 +76,6 @@ export default function Banner() {
           <CountdownIcon name="Seconds" value={seconds} />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

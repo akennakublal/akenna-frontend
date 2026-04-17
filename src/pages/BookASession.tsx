@@ -1,13 +1,13 @@
 import Button from "../components/Button";
 
-export default function Contact() {
+export default function BookASession() {
   return (
-    // Contact section with responsive padding and background
+    // Book section with responsive padding and background
     <section className="flex flex-col gap-8 px-16 md:px-32 xl:px-64 py-16 bg-secondaryBrown text-white">
       {/* Text Section */}
       <article className="space-y-4">
         <h1 className="text-3xl font-semibold">
-          For questions and any assistance please contact:
+          To book a session, please contact:
         </h1>
         <p className="text-lg">
           Please complete the below form and we will respond to you as soon as
@@ -15,7 +15,7 @@ export default function Contact() {
         </p>
       </article>
 
-      {/* Contact Form */}
+      {/* Booking Form */}
       <form action="" className="grid grid-cols-2 gap-6">
         {/* Name */}
         <label
@@ -32,10 +32,25 @@ export default function Contact() {
           />
         </label>
 
+        {/* Date Time */}
+        <label
+          htmlFor="dateTime"
+          className="px-4 py-2 col-span-2 sm:col-span-1 bg-white text-primaryBrown rounded-lg"
+        >
+          <input
+            type="datetime-local"
+            id="dateTime"
+            name="dateTime"
+            placeholder="Date and Time"
+            className="w-full placeholder:text-secondaryBrown"
+            required
+          />
+        </label>
+
         {/* Email Address */}
         <label
           htmlFor="email"
-          className="px-4 py-2 col-span-2 sm:col-span-1 bg-white text-primaryBrown rounded-lg"
+          className="px-4 py-2 col-span-2 bg-white text-primaryBrown rounded-lg"
         >
           <input
             type="email"

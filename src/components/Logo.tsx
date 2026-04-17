@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function Logo() {
   return (
-    <Link to="/" className="flex gap-2">
-      {/* Logo */}
+    <Link to="/" className="flex gap-2" aria-label="Akenna Kublal homepage">
+      {/* Logo SVG */}
       <svg
         width="400"
         height="333"
@@ -11,6 +11,9 @@ export default function Logo() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="h-16 w-16 lg:h-20 lg:w-20"
+        role="img"
+        aria-hidden="true"
+        focusable="false"
       >
         <g clipPath="url(#clip0_55_2)">
           <path
@@ -27,7 +30,7 @@ export default function Logo() {
         </defs>
       </svg>
 
-      {/* Text */}
+      {/* Logo text */}
       <h1 className="flex flex-col font-header text-xl xl:text-2xl text-primaryBrown justify-center">
         <span className="tracking-tighter">Akenna</span>
         <span className="tracking-tighter">Kublal</span>

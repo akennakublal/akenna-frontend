@@ -1,30 +1,17 @@
-import type { EventContent } from "../types/globals";
-import TextSection from "../components/TextSection";
-import EventSection from "../components/EventSection";
-import { usePageContent } from "../hooks/usePageContent";
 import SEO from "../components/SEO";
 import Skeleton from "../components/Skeleton";
+import TextSection from "../components/TextSection";
+import { usePageContent } from "../hooks/usePageContent";
 
-export default function Speaking() {
-  // Fetch page data for the "speaking" page
-  const { pageData, loading, error } = usePageContent("speaking");
+function GroupCoaching() {
+  // Fetch page data for the "group-coaching" page
+  const { pageData, loading, error } = usePageContent("group-coaching");
 
   // Loading, error, and empty state handling
   if (loading)
     return <Skeleton imageHeight="h-160" lines={1} className="mb-4" />;
   if (error) return <div>Error: {error}</div>;
   if (!pageData) return <div>No page data found.</div>;
-
-  // Filter and sort upcoming events
-  const upcomingEvents: EventContent[] = pageData?.events
-    .filter((event) => {
-      const eventDate = new Date(event.date);
-      const currentDate = new Date();
-      return eventDate >= currentDate;
-    })
-    .sort((a, b) => {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    });
 
   return (
     <>
@@ -75,15 +62,8 @@ export default function Speaking() {
           </div>
         );
       })}
-
-      {/* Render upcoming events section if events exist */}
-      {pageData.events && (
-        <EventSection
-          upcomingEvents={upcomingEvents}
-          title="Upcoming Events"
-          loading={loading}
-        />
-      )}
     </>
   );
 }
+
+export default GroupCoaching;
