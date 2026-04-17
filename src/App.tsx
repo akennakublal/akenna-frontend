@@ -3,8 +3,11 @@ import AppRoutes from "./AppRoutes";
 
 function App() {
   return (
-    <div className="font-body p-0 m-0">
+    // Root app container, applies global font and resets padding/margin
+    <div className="font-body p-0 m-0 min-h-screen">
+      {/* Router wraps all routes for SPA navigation */}
       <Router>
+        {/* AppRoutes handles all route definitions */}
         <AppRoutes />
       </Router>
     </div>
