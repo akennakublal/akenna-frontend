@@ -11,8 +11,11 @@ export default function TextSection({
   imageDirection,
   cta,
 }: TextSectionProps) {
-  const imageUrl = image?.formats?.medium?.url
-    ? IMAGE_API_URL + image.formats.medium.url
+  const rawUrl = image?.formats?.medium?.url;
+  const imageUrl = rawUrl
+    ? rawUrl.startsWith("http")
+      ? rawUrl
+      : IMAGE_API_URL + rawUrl
     : null;
 
   return (
