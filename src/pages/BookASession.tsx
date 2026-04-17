@@ -1,17 +1,22 @@
 import Button from "../components/Button";
+import SEO from "../components/SEO";
+import { usePageContent } from "../hooks/usePageContent";
 
 export default function BookASession() {
+  // Fetch page data for the "book-a-session" page
+  const { pageData } = usePageContent("book-a-session");
   return (
     // Book section with responsive padding and background
     <section className="flex flex-col gap-8 px-16 md:px-32 xl:px-64 py-16 bg-secondaryBrown text-white">
+      {/* Conditionally render SEO metadata */}
+      {pageData && pageData?.seo && <SEO {...pageData?.seo} />}
+
       {/* Text Section */}
       <article className="space-y-4">
-        <h1 className="text-3xl font-semibold">
-          To book a session, please contact:
-        </h1>
+        <h1 className="text-3xl font-semibold">Book Your Session</h1>
         <p className="text-lg">
-          Please complete the below form and we will respond to you as soon as
-          possible.
+          Your next level starts here. Book a session to gain clarity, overcome
+          obstacles, and take actionable steps toward your goals.
         </p>
       </article>
 

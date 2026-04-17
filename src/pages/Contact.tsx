@@ -1,17 +1,22 @@
 import Button from "../components/Button";
+import SEO from "../components/SEO";
+import { usePageContent } from "../hooks/usePageContent";
 
 export default function Contact() {
+  // Fetch page data for the "contact" page
+  const { pageData } = usePageContent("contact");
   return (
     // Contact section with responsive padding and background
     <section className="flex flex-col gap-8 px-16 md:px-32 xl:px-64 py-16 bg-secondaryBrown text-white">
+      {/* Conditionally render SEO metadata */}
+      {pageData && pageData?.seo && <SEO {...pageData?.seo} />}
+
       {/* Text Section */}
       <article className="space-y-4">
-        <h1 className="text-3xl font-semibold">
-          For questions and any assistance please contact:
-        </h1>
+        <h1 className="text-3xl font-semibold">Let’s Connect</h1>
         <p className="text-lg">
-          Please complete the below form and we will respond to you as soon as
-          possible.
+          Have a question or want to learn more? Send a message and I’ll get
+          back to you as soon as possible.
         </p>
       </article>
 
