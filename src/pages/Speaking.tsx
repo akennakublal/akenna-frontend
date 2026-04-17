@@ -35,40 +35,40 @@ export default function Speaking() {
       {pageData.textSections?.map((section) => {
         // Dynamically build gradient classes based on section props
         const gradientDirectionClass =
-          section.gradient.direction === "to bottom"
+          section?.gradient?.direction === "to bottom"
             ? "bg-linear-to-b"
-            : section.gradient.direction === "to top"
-            ? "bg-linear-to-t"
-            : section.gradient.direction === "to left"
-            ? "bg-linear-to-l"
-            : "bg-linear-to-r";
+            : section?.gradient?.direction === "to top"
+              ? "bg-linear-to-t"
+              : section?.gradient?.direction === "to left"
+                ? "bg-linear-to-l"
+                : "bg-linear-to-r";
 
         const gradientStartClass =
-          section.gradient.startColor === "primaryBrown"
+          section?.gradient?.startColor === "primaryBrown"
             ? "from-primaryBrown"
-            : section.gradient.startColor === "secondaryBrown"
-            ? "from-secondaryBrown"
-            : section.gradient.startColor === "primaryNude"
-            ? "from-primaryNude"
-            : section.gradient.startColor === "lightNude"
-            ? "from-lightNude"
-            : "from-lighterNude";
+            : section?.gradient?.startColor === "secondaryBrown"
+              ? "from-secondaryBrown"
+              : section?.gradient?.startColor === "primaryNude"
+                ? "from-primaryNude"
+                : section?.gradient?.startColor === "lightNude"
+                  ? "from-lightNude"
+                  : "from-lighterNude";
 
         const gradientEndClass =
-          section.gradient.endColor === "primaryBrown"
+          section?.gradient?.endColor === "primaryBrown"
             ? "to-primaryBrown"
-            : section.gradient.endColor === "secondaryBrown"
-            ? "to-secondaryBrown"
-            : section.gradient.endColor === "primaryNude"
-            ? "to-primaryNude"
-            : section.gradient.endColor === "lightNude"
-            ? "to-lightNude"
-            : "to-lighterNude";
+            : section?.gradient?.endColor === "secondaryBrown"
+              ? "to-secondaryBrown"
+              : section?.gradient?.endColor === "primaryNude"
+                ? "to-primaryNude"
+                : section?.gradient?.endColor === "lightNude"
+                  ? "to-lightNude"
+                  : "to-lighterNude";
 
         return (
           <div
             key={section.title}
-            className={`relative px-6 py-8 sm:px-12 lg:py-16 lg:px-32 ${gradientDirectionClass} ${gradientStartClass} ${gradientEndClass}`}
+            className={`relative px-6 py-8 sm:px-12 lg:py-16 lg:px-32 ${section?.gradient ? `${gradientDirectionClass} ${gradientStartClass} ${gradientEndClass}` : section?.backgroundColor ? `bg-${section.backgroundColor}` : "bg-lighterNude"}`}
           >
             {/* Render TextSection with all section props */}
             <TextSection {...section} />
