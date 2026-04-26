@@ -5,6 +5,7 @@ import { usePageContent } from "../hooks/usePageContent";
 import EventSection from "../components/EventSection";
 import SEO from "../components/SEO";
 import Skeleton from "../components/Skeleton";
+import RevealSection from "../components/RevealSection";
 
 export default function Home() {
   // Fetch global and page data for the home page
@@ -74,7 +75,9 @@ export default function Home() {
             className={`relative px-6 py-8 sm:px-12 lg:py-16 lg:px-32 ${section?.gradient ? `${gradientDirectionClass} ${gradientStartClass} ${gradientEndClass}` : section?.backgroundColor ? `bg-${section.backgroundColor}` : "bg-lighterNude"}`}
           >
             {/* Render TextSection with all section props */}
-            <TextSection {...section} />
+            <RevealSection direction={section.textLocation}>
+              <TextSection {...section} />
+            </RevealSection>
           </div>
         );
       })}

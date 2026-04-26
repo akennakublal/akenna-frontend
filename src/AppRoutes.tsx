@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
@@ -17,6 +17,8 @@ import { useBannerContent } from "./hooks/useBannerContent";
 import { ROUTES } from "./config/routes";
 import Skeleton from "./components/Skeleton";
 import { useGlobalContent } from "./hooks/useGlobalContent";
+import { AnimatePresence } from "framer-motion";
+import PageTransition from "./components/PageTransition";
 // import HomeRedesign from "./pages/HomeRedesign";
 
 // Utility function to check for network errors
@@ -60,7 +62,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       ) : (
         <Navbar />
       )}
-      {children}
+      <PageTransition>{children}</PageTransition>
       {bannerLoading && globalLoading ? (
         <Skeleton imageHeight="h-12" lines={1} className="mb-4" />
       ) : (
@@ -71,23 +73,26 @@ function Layout({ children }: { children: React.ReactNode }) {
 }
 
 function AppRoutes() {
+  const location = useLocation();
+
   return (
     <Suspense
       fallback={
         <Skeleton imageHeight="h-200" lines={5} className="h-64 mb-8" />
       }
     >
-      <Routes>
-        {/* Home route */}
-        <Route
-          path={ROUTES.HOME}
-          element={
-            <Layout>
-              <Home />
-            </Layout>
-          }
-        />
-        {/* <Route
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          {/* Home route */}
+          <Route
+            path={ROUTES.HOME}
+            element={
+              <Layout>
+                <Home />
+              </Layout>
+            }
+          />
+          {/* <Route
           path={ROUTES.HOME_REDESIGN}
           element={
             <Layout>
@@ -95,73 +100,74 @@ function AppRoutes() {
             </Layout>
           }
         /> */}
-        {/* Contact route */}
-        <Route
-          path={ROUTES.CONTACT}
-          element={
-            <Layout>
-              <Contact />
-            </Layout>
-          }
-        />
-        {/* Book a Session route */}
-        <Route
-          path={ROUTES.BOOK_A_SESSION}
-          element={
-            <Layout>
-              <BookASession />
-            </Layout>
-          }
-        />
-        {/* About route */}
-        <Route
-          path={ROUTES.ABOUT}
-          element={
-            <Layout>
-              <About />
-            </Layout>
-          }
-        />
-        {/* Personal Coaching route */}
-        <Route
-          path={ROUTES.COACHING.PERSONAL}
-          element={
-            <Layout>
-              <PersonalCoaching />
-            </Layout>
-          }
-        />
-        {/* Group Coaching route */}
-        <Route
-          path={ROUTES.COACHING.GROUP}
-          element={
-            <Layout>
-              <GroupCoaching />
-            </Layout>
-          }
-        />
-        {/* Corporate Coaching route */}
-        <Route
-          path={ROUTES.COACHING.CORPORATE}
-          element={
-            <Layout>
-              <CorporateCoaching />
-            </Layout>
-          }
-        />
-        {/* Speaking route */}
-        <Route
-          path={ROUTES.SPEAKING}
-          element={
-            <Layout>
-              <Speaking />
-            </Layout>
-          }
-        />
-        {/* Maintenance and NotFound routes */}
-        <Route path={ROUTES.MAINTENANCE} element={<Maintenance />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* Contact route */}
+          <Route
+            path={ROUTES.CONTACT}
+            element={
+              <Layout>
+                <Contact />
+              </Layout>
+            }
+          />
+          {/* Book a Session route */}
+          <Route
+            path={ROUTES.BOOK_A_SESSION}
+            element={
+              <Layout>
+                <BookASession />
+              </Layout>
+            }
+          />
+          {/* About route */}
+          <Route
+            path={ROUTES.ABOUT}
+            element={
+              <Layout>
+                <About />
+              </Layout>
+            }
+          />
+          {/* Personal Coaching route */}
+          <Route
+            path={ROUTES.COACHING.PERSONAL}
+            element={
+              <Layout>
+                <PersonalCoaching />
+              </Layout>
+            }
+          />
+          {/* Group Coaching route */}
+          <Route
+            path={ROUTES.COACHING.GROUP}
+            element={
+              <Layout>
+                <GroupCoaching />
+              </Layout>
+            }
+          />
+          {/* Corporate Coaching route */}
+          <Route
+            path={ROUTES.COACHING.CORPORATE}
+            element={
+              <Layout>
+                <CorporateCoaching />
+              </Layout>
+            }
+          />
+          {/* Speaking route */}
+          <Route
+            path={ROUTES.SPEAKING}
+            element={
+              <Layout>
+                <Speaking />
+              </Layout>
+            }
+          />
+          {/* Maintenance and NotFound routes */}
+          <Route path={ROUTES.MAINTENANCE} element={<Maintenance />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AnimatePresence>
     </Suspense>
   );
 }

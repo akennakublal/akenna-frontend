@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Logo() {
   return (
-    <Link to="/" className="flex gap-2" aria-label="Akenna Kublal homepage">
+    <Link to="/" className="flex gap-2" aria-label="Akenna Cyrus homepage">
       {/* Logo SVG */}
       <svg
         width="400"
@@ -33,7 +33,7 @@ export default function Logo() {
       {/* Logo text */}
       <h1 className="flex flex-col font-header text-xl xl:text-2xl text-primaryBrown justify-center">
         <span className="tracking-tighter">Akenna</span>
-        <span className="tracking-tighter">Kublal</span>
+        <span className="tracking-tighter">Cyrus</span>
       </h1>
     </Link>
   );

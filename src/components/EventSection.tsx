@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import type { EventContent } from "../types/globals";
 import Event from "./Event";
 import Skeleton from "./Skeleton";
@@ -20,11 +21,29 @@ function EventSection({
     // Section groups the event list for semantics and accessibility
     <section className="flex flex-col justify-start relative px-6 py-8 sm:px-12 lg:py-16 lg:px-32 bg-lighterNude text-primaryBrown">
       {/* Section heading */}
-      <h2 className="w-fit text-center font-bold text-3xl border-b-4 border-primaryBrown">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="w-fit text-center font-bold text-3xl border-b-4 border-primaryBrown"
+      >
         {title}
-      </h2>
+      </motion.h2>
+
       {/* Responsive event grid, aria-live for screen reader updates */}
-      <div
+      <motion.div
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.18,
+            },
+          },
+        }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.15 }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 align-top justify-items-center md:justify-items-stretch gap-8 py-8"
         aria-live="polite"
       >
@@ -41,7 +60,7 @@ function EventSection({
             There are no upcoming events
           </h3>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 }

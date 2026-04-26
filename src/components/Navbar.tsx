@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { InlineIcon } from "@iconify/react";
 import { Link } from "react-router-dom";
@@ -6,10 +6,18 @@ import DropdownLink from "./DropdownLink";
 import Button from "./Button";
 import { useNavbarContent } from "../hooks/useNavbarContent";
 import Skeleton from "./Skeleton";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const { navbarData, loading, error } = useNavbarContent();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Loading, error, and empty state handling
   if (loading)
@@ -39,8 +47,12 @@ export default function Navbar() {
   }
 
   return (
-    <nav
-      className="sticky top-0 left-0 z-99 font-body w-full flex flex-col lg:flex-row items-center justify-between px-8 xl:px-16 py-4 bg-lighterNude text-primaryBrown"
+    <motion.nav
+      className={`sticky top-0 left-0 z-99 font-body w-full flex flex-col lg:flex-row items-center justify-between px-8 xl:px-16 py-4 text-primaryBrown transition-all duration-500 ${
+        scrolled
+          ? "bg-lighterNude/80 backdrop-blur-md shadow-md"
+          : "bg-lighterNude"
+      }`}
       aria-label="Main navigation"
     >
       <div className="flex items-center justify-between lg:w-auto w-full">
@@ -69,7 +81,7 @@ export default function Navbar() {
         id="main-menu"
         className={`${
           !menuOpen && "hidden lg:flex"
-        } flex flex-col lg:flex-row lg:justify-start justify-center items-center gap-2 lg:gap-8 xl:gap-16 transition-all duration-500 text-center text-sm lg:text-base xl:text-xl`}
+        } flex flex-col lg:flex-row lg:justify-start justify-center items-center gap-2 lg:gap-8 xl:gap-16 transition-all duration-500 text-center xl:text-xl`}
       >
         {parents.map((parent) => {
           const children = childrenMap[parent.title] || [];
@@ -91,7 +103,7 @@ export default function Navbar() {
             <Link
               key={parent.title}
               to={`/${parent.slug}`}
-              className="px-4 py-2 rounded-2xl transition-200 hover:bg-lightNude"
+              className="px-4 py-2 rounded-2xl transition-200 hover:underline hover:underline-offset-4"
               onClick={toggleMenu}
             >
               {parent.title}
@@ -103,11 +115,11 @@ export default function Navbar() {
       {/* CTA Button: Only visible on large screens */}
       <Button
         title="Book a Session"
-        url="/contact"
+        url="/book-a-session"
         backgroundColor="primaryBrown"
         textColor="white"
         otherStyles="hidden lg:block"
       />
-    </nav>
+    </motion.nav>
   );
 }

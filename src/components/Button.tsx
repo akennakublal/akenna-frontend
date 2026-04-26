@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Button } from "../types/globals";
 import clsx from "clsx";
+import { motion } from "framer-motion";
 
 /**
  * Props for the Button component.
@@ -62,34 +63,46 @@ export default function Button({
   // Render internal link using react-router-dom
   if (url && url.startsWith("/")) {
     return (
-      <Link to={url} className={className}>
-        {title}
-      </Link>
+      <motion.span
+        whileHover={{ scale: 1.04, y: -2 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.2 }}
+      >
+        <Link to={url} className={className}>
+          {title}
+        </Link>
+      </motion.span>
     );
   }
 
   // Render external link
   if (url && (url.startsWith("http://") || url.startsWith("https://"))) {
     return (
-      <a
+      <motion.a
         href={url}
         className={className}
         target="_blank"
         rel="noopener noreferrer"
+        whileHover={{ scale: 1.04, y: -2 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.2 }}
       >
         {title}
-      </a>
+      </motion.a>
     );
   }
 
   // Render button (default)
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.04, y: -2 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2 }}
       type={type !== "link" && type ? type : "button"}
       onClick={onClick}
       className={className}
     >
       {title}
-    </button>
+    </motion.button>
   );
 }

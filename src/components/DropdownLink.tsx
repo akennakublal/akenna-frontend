@@ -42,7 +42,7 @@ export default function DropdownLink({ name, links }: DropdownLink) {
         aria-haspopup="menu"
         aria-expanded={dropdownMenuOpen}
         aria-controls={menuId}
-        className="flex gap-2 items-center cursor-pointer px-4 py-2 rounded-2xl transition-200 hover:bg-lightNude"
+        className="flex gap-2 items-center cursor-pointer px-4 py-2 rounded-2xl transition-200 hover:underline hover:underline-offset-4"
         onClick={() => setDropdownMenuOpen((prev) => !prev)}
       >
         <span>{name}</span>
