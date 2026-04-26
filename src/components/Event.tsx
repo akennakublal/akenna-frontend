@@ -23,12 +23,12 @@ export default function Event({ title, subtitle, date, image }: EventContent) {
       }}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.35 }}
-      className="space-y-3 w-full max-w-xs rounded-2xl overflow-hidden bg-white/60 shadow-md hover:shadow-xl p-3"
+      className="space-y-3 w-full max-w-xs rounded-2xl overflow-hidden bg-white/60 shadow-md hover:shadow-xl p-4"
     >
       {/* Event image or placeholder */}
       {imageUrl ? (
         <motion.img
-          whileHover={{ scale: 1.08 }}
+          whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.4 }}
           src={imageUrl}
           alt=""

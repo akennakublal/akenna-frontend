@@ -46,7 +46,7 @@ export default function TextSection({
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.25 }}
         transition={{ duration: 0.75, ease: "easeOut" }}
-        className={`z-15 flex flex-col gap-6 w-1/2 lg:w-3/5 ${
+        className={`z-15 flex flex-col gap-6 w-full lg:w-3/5 ${
           textColorMap[textColor] || "text-primaryBrown"
         } ${textLocation === "right" ? "text-right items-end" : "items-start"}`}
       >
@@ -61,27 +61,55 @@ export default function TextSection({
           {title}
         </motion.h2>
 
-        {/* Description */}
-        <motion.article
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.28, duration: 0.6 }}
-          className="lg:text-xl xl:text-2xl whitespace-pre-wrap"
-        >
-          {description}
-        </motion.article>
-        {/* CTA Button */}
-        {cta && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
-            <Button {...cta} />
-          </motion.div>
-        )}
+        <div className="flex justify-between items-center w-full gap-8">
+          {/* Text Section */}
+          <div className="flex flex-col w-1/2 gap-6 lg:w-3/5">
+            {/* Description */}
+            <motion.article
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.28, duration: 0.6 }}
+              className="lg:text-xl xl:text-2xl whitespace-pre-wrap"
+            >
+              {description}
+            </motion.article>
+            {/* CTA Button */}
+            {cta && (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+              >
+                <Button {...cta} />
+              </motion.div>
+            )}
+          </div>
+
+          {/* Image Section */}
+          {imageUrl && (
+            <motion.div
+              initial={{ opacity: 0, x: imageInitialX, scale: 0.94 }}
+              whileInView={{ opacity: 1, x: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+              className="flex relative z-10 md:hidden items-center justify-center"
+            >
+              <motion.img
+                whileHover={{ scale: 1.06 }}
+                transition={{ duration: 0.35 }}
+                src={imageUrl}
+                title={`${title} section image`}
+                alt={image.alternativeText || `${title} section image`}
+                className={`rounded-xl object-cover h-sm max-h-sm max-w-48 h-auto ${
+                  imageDirection === "left" ? "-scale-x-100" : ""
+                }`}
+                loading="lazy"
+              />
+            </motion.div>
+          )}
+        </div>
       </motion.div>
 
       {/* {imageUrl && (
@@ -106,7 +134,7 @@ export default function TextSection({
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.85, ease: "easeOut" }}
-          className="relative z-10 flex h-lg justify-self-stretch items-center justify-center w-1/2 lg:w-2/5 lg:h-full"
+          className="hidden relative z-10 md:flex h-lg justify-self-stretch items-center justify-center w-1/2 lg:w-2/5 lg:h-full"
         >
           <motion.img
             whileHover={{ scale: 1.06 }}
