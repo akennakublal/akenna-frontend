@@ -102,7 +102,7 @@ export default function TextSection({
                 src={imageUrl}
                 title={`${title} section image`}
                 alt={image.alternativeText || `${title} section image`}
-                className={`rounded-xl object-cover h-sm max-h-sm max-w-48 h-auto ${
+                className={`rounded-xl object-cover max-w-40 h-auto ${
                   imageDirection === "left" ? "-scale-x-100" : ""
                 }`}
                 loading="lazy"
