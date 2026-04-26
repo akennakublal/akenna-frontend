@@ -61,7 +61,9 @@ export default function TextSection({
           {title}
         </motion.h2>
 
-        <div className="flex justify-between items-center border-2 w-full gap-8">
+        <div
+          className={`flex ${textLocation === "right" ? "flex-row-reverse" : "flex-row"} justify-between items-center w-full gap-8`}
+        >
           {/* Text Section */}
           <div
             className={`flex flex-col justify-center ${textLocation === "right" ? "items-end" : "items-start"} w-1/2 gap-6 lg:w-full`}
