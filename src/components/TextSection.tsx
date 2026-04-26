@@ -61,9 +61,11 @@ export default function TextSection({
           {title}
         </motion.h2>
 
-        <div className="flex justify-between items-center w-full gap-8">
+        <div className="flex justify-between items-center border-2 w-full gap-8">
           {/* Text Section */}
-          <div className="flex flex-col w-1/2 gap-6 lg:w-3/5">
+          <div
+            className={`flex flex-col justify-center ${textLocation === "right" ? "items-end" : "items-start"} w-1/2 gap-6 lg:w-full`}
+          >
             {/* Description */}
             <motion.article
               initial={{ opacity: 0, y: 15 }}
@@ -134,7 +136,7 @@ export default function TextSection({
           whileInView={{ opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.85, ease: "easeOut" }}
-          className="hidden relative z-10 md:flex h-lg justify-self-stretch items-center justify-center w-1/2 lg:w-2/5 lg:h-full"
+          className="hidden relative z-10 md:flex h-lg justify-self-stretch items-center justify-center w-2/5 h-full"
         >
           <motion.img
             whileHover={{ scale: 1.06 }}
