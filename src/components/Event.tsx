@@ -1,6 +1,7 @@
 // import { IMAGE_API_URL } from "../api/strapi";
 import { motion } from "framer-motion";
 import type { EventContent } from "../types/globals";
+import { IMAGE_API_URL } from "../api/strapi";
 
 export default function Event({ title, subtitle, date, image }: EventContent) {
   const eventDateObj = new Date(date);
@@ -13,7 +14,14 @@ export default function Event({ title, subtitle, date, image }: EventContent) {
     minute: "2-digit",
   });
 
-  const imageUrl = image ? image.formats.thumbnail.url : null;
+  const rawUrl = image?.formats?.large?.url;
+  const imageUrl = rawUrl
+    ? rawUrl.startsWith("http")
+      ? rawUrl
+      : IMAGE_API_URL + rawUrl
+    : null;
+
+  // const imageUrl = image ? image.formats.thumbnail.url : null;
 
   return (
     <motion.article

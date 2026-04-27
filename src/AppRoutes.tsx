@@ -19,6 +19,7 @@ import Skeleton from "./components/Skeleton";
 import { useGlobalContent } from "./hooks/useGlobalContent";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "./components/PageTransition";
+import ScrollToTop from "./components/ScrollToTop";
 // import HomeRedesign from "./pages/HomeRedesign";
 
 // Utility function to check for network errors
@@ -82,6 +83,7 @@ function AppRoutes() {
       }
     >
       <AnimatePresence mode="wait">
+        <ScrollToTop />
         <Routes location={location} key={location.pathname}>
           {/* Home route */}
           <Route
