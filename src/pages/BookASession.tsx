@@ -29,7 +29,10 @@ export default function BookASession() {
 
       {/* Booking Form */}
       <motion.form
-        action=""
+        name="booking"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
         variants={{
           hidden: {},
           show: {
@@ -43,6 +46,14 @@ export default function BookASession() {
         viewport={{ once: true, amount: 0.15 }}
         className="grid grid-cols-2 gap-6"
       >
+
+        {/* Netlify Honeypot */}
+        <input type="hidden" name="form-name" value="booking" />
+        <p className="hidden">
+          <label>
+            Don’t fill this out if you’re human: <input name="bot-field" />
+          </label>
+        </p>
         {/* Name */}
         <motion.label
           variants={{
@@ -124,6 +135,7 @@ export default function BookASession() {
 
         {/* Submit Button */}
         <Button
+        type="submit"
           title="Send Message"
           otherStyles="col-span-2"
           backgroundColor="white"
