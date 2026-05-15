@@ -48,7 +48,7 @@ export default function Contact() {
         className="grid grid-cols-2 gap-6"
       >
         {/* Netlify Honeypot */}
-        <input type="hidden" name="form-name" value="booking" />
+        <input type="hidden" name="form-name" value="contact" />
         <p className="hidden">
           <label>
             Don’t fill this out if you’re human: <input name="bot-field" />
