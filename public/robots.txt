@@ -3,9 +3,6 @@ User-agent: *
 Disallow:
 
 # Specify the location of your sitemap for better SEO
-Sitemap: https://akennakublalgroup.com/sitemap.xml
+Sitemap: https://akennacyrus.com/sitemap.xml
 
-# Add comments for clarity and maintainability
-# User-agent: *      - Applies to all web crawlers
-# Disallow:          - No paths are disallowed (full access)
-# Sitemap:           - Helps search engines find your sitemap
+Disallow: /maintenance
