@@ -6,6 +6,7 @@ import EventSection from "../components/EventSection";
 import SEO from "../components/SEO";
 import Skeleton from "../components/Skeleton";
 import RevealSection from "../components/RevealSection";
+import TextMarquee from "../components/TextMarquee";
 
 export default function Home() {
   // Fetch global and page data for the home page
@@ -34,6 +35,17 @@ export default function Home() {
     <>
       {/* Conditionally render SEO metadata */}
       {pageData.seo && <SEO {...pageData.seo} />}
+      <TextMarquee
+        items={[
+          "Labour of Love 2026",
+          "UNBROKEN",
+          "June 20th, 2026",
+          "Trinidad and Tobago",
+          "Tickets Available Now",
+        ]}
+        speed={50}
+        className="bg-primaryBrown text-white py-4"
+      />
 
       {/* Render each text section with responsive and gradient backgrounds */}
       {pageData.textSections?.map((section) => {
