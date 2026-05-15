@@ -1,9 +1,9 @@
+import { motion } from "framer-motion";
 import useCountdown from "../hooks/useCountdown";
 import type { BannerContent } from "../types/globals";
 import Button from "./Button";
 import CountdownIcon from "./CountdownIcon";
-// import { IMAGE_API_URL } from "../api/strapi";
-// import { useEffect } from "react";
+import { IMAGE_API_URL } from "../api/strapi";
 
 export default function Banner({
   title,
@@ -19,43 +19,96 @@ export default function Banner({
     month: "long",
     day: "numeric",
   });
-  // const backgroundImageUrl = IMAGE_API_URL + backgroundImage.formats.medium.url;
-  const backgroundImageUrl = backgroundImage.formats.medium.url;
+
+  const rawUrl = backgroundImage?.formats?.medium?.url;
+  const imageUrl = rawUrl
+    ? rawUrl.startsWith("http")
+      ? rawUrl
+      : IMAGE_API_URL + rawUrl
+    : null;
   const [days, hours, minutes, seconds] = useCountdown(eventDateObj);
 
-  // useEffect(() => {
-  //   console.log("Fixed backgroundImageUrl:", backgroundImageUrl);
-  //   console.log("Image API URL:", IMAGE_API_URL);
-  //   console.log("Background image URL:", backgroundImage.formats.medium.url);
-  // }, [backgroundImageUrl, backgroundImage]);
-
   return (
-    <section
+    <motion.section
       aria-label="Event Banner"
+      initial={{ opacity: 0, y: -24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       className="z-10 relative bg-linear-to-r from-primaryBrown to-lighterNude flex flex-col md:flex-row md:px-16 px-4 py-4 justify-between items-center text-white"
     >
       {/* Background Image */}
-      {backgroundImageUrl && (
-        <img
-          src={backgroundImageUrl}
+      {imageUrl && (
+        <motion.img
+          src={imageUrl}
           alt=""
           fetchPriority="high"
           aria-hidden="true"
-          className="absolute inset-0 z-0 w-480 h-full object-cover opacity-60"
+          initial={{ scale: 1.08, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.6 }}
+          transition={{ duration: 1.4, ease: "easeOut" }}
+          className="absolute inset-0 z-0 w-full h-full object-cover object-center opacity-60"
         />
       )}
 
+      <div className="absolute inset-0 z-1 bg-black/15" />
+
+      <motion.div
+        aria-hidden="true"
+        initial={{ x: "-120%" }}
+        animate={{ x: "120%" }}
+        transition={{
+          duration: 3.5,
+          repeat: Infinity,
+          repeatDelay: 4,
+          ease: "easeInOut",
+        }}
+        className="absolute inset-y-0 z-2 w-1/3 bg-white/10 blur-2xl rotate-12"
+      />
+
       {/* Event Name and Description */}
-      <div className="z-10 flex flex-col py-7 gap-3 w-full md:w-1/2">
+      <motion.div
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.16,
+            },
+          },
+        }}
+        initial="hidden"
+        animate="show"
+        className="z-10 flex flex-col py-7 gap-3 w-full md:w-1/2"
+      >
         {/* Name */}
-        <h1 className="font-cursive text-5xl md:text-6xl font-bold text-center md:text-left">
+        <motion.h1
+          variants={{
+            hidden: { opacity: 0, y: 24 },
+            show: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.65, ease: "easeOut" }}
+          className="font-cursive text-5xl md:text-6xl font-bold text-center md:text-left"
+        >
           {title}
-        </h1>
-        <p className="text-center md:text-left">{description}</p>
-      </div>
+        </motion.h1>
+        <motion.p
+          variants={{
+            hidden: { opacity: 0, y: 18 },
+            show: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center md:text-left"
+        >
+          {description}
+        </motion.p>
+      </motion.div>
 
       {/* Countdown Container */}
-      <div className="z-10 flex flex-col items-center justify-center bg-primaryBrown/80 gap-3 px-6 py-6 rounded-2xl">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.92, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ delay: 0.35, duration: 0.65, ease: "easeOut" }}
+        className="z-10 flex flex-col items-center justify-center bg-primaryBrown/80 gap-3 px-6 py-6 rounded-2xl"
+      >
         <h2 className="text-center uppercase font-bold lg:text-xl tracking-widest">
           {/* Date */}
           <time>{formattedDate}</time>
@@ -69,13 +122,45 @@ export default function Banner({
         <Button {...cta} />
 
         {/* Countdown */}
-        <div className="flex justify-between items-center gap-2">
-          <CountdownIcon name="Days" value={days} />
-          <CountdownIcon name="Hours" value={hours} />
-          <CountdownIcon name="Minutes" value={minutes} />
-          <CountdownIcon name="Seconds" value={seconds} />
-        </div>
-      </div>
-    </section>
+        <motion.div
+          variants={{
+            hidden: {},
+            show: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+          initial="hidden"
+          animate="show"
+          className="flex justify-between items-center gap-2"
+        >
+          {[
+            { name: "Days", value: days },
+            { name: "Hours", value: hours },
+            { name: "Minutes", value: minutes },
+            { name: "Seconds", value: seconds },
+          ].map((item) => (
+            <motion.div
+              key={item.name}
+              variants={{
+                hidden: { opacity: 0, y: 14 },
+                show: { opacity: 1, y: 0 },
+              }}
+              animate={{
+                scale: 1,
+              }}
+              transition={{
+                duration: 0.45,
+                repeat: 0,
+                ease: "easeInOut",
+              }}
+            >
+              <CountdownIcon name={item.name} value={item.value} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 }
