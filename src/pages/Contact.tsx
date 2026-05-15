@@ -29,6 +29,7 @@ export default function Contact() {
 
       {/* Contact Form */}
       <motion.form
+        action=""
         name="contact"
         method="POST"
         data-netlify="true"
