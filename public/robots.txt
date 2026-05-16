@@ -1,7 +1,6 @@
 # Allow all search engines to crawl the entire site
 User-agent: *
+Disallow: /maintenance
 
 # Specify the location of your sitemap for better SEO
 Sitemap: https://akennacyrus.com/sitemap.xml
-
-Disallow: /maintenance
