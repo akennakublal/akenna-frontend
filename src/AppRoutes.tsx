@@ -20,16 +20,26 @@ import { useGlobalContent } from "./hooks/useGlobalContent";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "./components/PageTransition";
 import ScrollToTop from "./components/ScrollToTop";
-// import HomeRedesign from "./pages/HomeRedesign";
 
 // Utility function to check for network errors
 function isNetworkError(error: unknown): boolean {
-  if (!error || typeof error !== "object") return false;
-  // Check if error has a 'message' property of type string
-  const message = (error as { message?: string }).message;
+  const message =
+    error instanceof Error
+      ? error.message
+      : typeof error === "string"
+        ? error
+        : typeof error === "object" &&
+            error !== null &&
+            "message" in error &&
+            typeof (error as { message?: unknown }).message === "string"
+          ? (error as { message: string }).message
+          : "";
+
   return (
-    typeof message === "string" &&
-    (message.includes("Network Error") || message.includes("Failed to fetch"))
+    message.includes("Network Error") ||
+    message.includes("Failed to fetch") ||
+    message.includes("503") ||
+    message.includes("Service Unavailable")
   );
 }
 
@@ -52,19 +62,19 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {/* Show banner or loading state */}
-      {bannerLoading && globalLoading ? (
+      {bannerLoading || globalLoading ? (
         <Skeleton imageHeight="h-48" lines={2} className="h-64 mb-8" />
       ) : (
         bannerData && <Banner {...bannerData} />
       )}
       {/* Navigation bar */}
-      {bannerLoading && globalLoading ? (
+      {bannerLoading || globalLoading ? (
         <Skeleton imageHeight="h-12" lines={1} className="mb-4" />
       ) : (
         <Navbar />
       )}
       <PageTransition>{children}</PageTransition>
-      {bannerLoading && globalLoading ? (
+      {bannerLoading || globalLoading ? (
         <Skeleton imageHeight="h-12" lines={1} className="mb-4" />
       ) : (
         <Footer />
@@ -77,100 +87,103 @@ function AppRoutes() {
   const location = useLocation();
 
   return (
-    <Suspense
-      fallback={
-        <Skeleton imageHeight="h-200" lines={5} className="h-64 mb-8" />
-      }
-    >
-      <AnimatePresence mode="wait">
-        <ScrollToTop />
-        <Routes location={location} key={location.pathname}>
-          {/* Home route */}
-          <Route
-            path={ROUTES.HOME}
-            element={
-              <Layout>
-                <Home />
-              </Layout>
-            }
-          />
-          {/* <Route
+    <>
+      <ScrollToTop />
+
+      <Suspense
+        fallback={
+          <Skeleton imageHeight="h-200" lines={5} className="h-64 mb-8" />
+        }
+      >
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            {/* Home route */}
+            <Route
+              path={ROUTES.HOME}
+              element={
+                <Layout>
+                  <Home />
+                </Layout>
+              }
+            />
+            {/* <Route
           path={ROUTES.HOME_REDESIGN}
           element={
             <Layout>
-              <HomeRedesign />
+            <HomeRedesign />
             </Layout>
-          }
+            }
         /> */}
-          {/* Contact route */}
-          <Route
-            path={ROUTES.CONTACT}
-            element={
-              <Layout>
-                <Contact />
-              </Layout>
-            }
-          />
-          {/* Book a Session route */}
-          <Route
-            path={ROUTES.BOOK_A_SESSION}
-            element={
-              <Layout>
-                <BookASession />
-              </Layout>
-            }
-          />
-          {/* About route */}
-          <Route
-            path={ROUTES.ABOUT}
-            element={
-              <Layout>
-                <About />
-              </Layout>
-            }
-          />
-          {/* Personal Coaching route */}
-          <Route
-            path={ROUTES.COACHING.PERSONAL}
-            element={
-              <Layout>
-                <PersonalCoaching />
-              </Layout>
-            }
-          />
-          {/* Group Coaching route */}
-          <Route
-            path={ROUTES.COACHING.GROUP}
-            element={
-              <Layout>
-                <GroupCoaching />
-              </Layout>
-            }
-          />
-          {/* Corporate Coaching route */}
-          <Route
-            path={ROUTES.COACHING.CORPORATE}
-            element={
-              <Layout>
-                <CorporateCoaching />
-              </Layout>
-            }
-          />
-          {/* Speaking route */}
-          <Route
-            path={ROUTES.SPEAKING}
-            element={
-              <Layout>
-                <Speaking />
-              </Layout>
-            }
-          />
-          {/* Maintenance and NotFound routes */}
-          <Route path={ROUTES.MAINTENANCE} element={<Maintenance />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </AnimatePresence>
-    </Suspense>
+            {/* Contact route */}
+            <Route
+              path={ROUTES.CONTACT}
+              element={
+                <Layout>
+                  <Contact />
+                </Layout>
+              }
+            />
+            {/* Book a Session route */}
+            <Route
+              path={ROUTES.BOOK_A_SESSION}
+              element={
+                <Layout>
+                  <BookASession />
+                </Layout>
+              }
+            />
+            {/* About route */}
+            <Route
+              path={ROUTES.ABOUT}
+              element={
+                <Layout>
+                  <About />
+                </Layout>
+              }
+            />
+            {/* Personal Coaching route */}
+            <Route
+              path={ROUTES.COACHING.PERSONAL}
+              element={
+                <Layout>
+                  <PersonalCoaching />
+                </Layout>
+              }
+            />
+            {/* Group Coaching route */}
+            <Route
+              path={ROUTES.COACHING.GROUP}
+              element={
+                <Layout>
+                  <GroupCoaching />
+                </Layout>
+              }
+            />
+            {/* Corporate Coaching route */}
+            <Route
+              path={ROUTES.COACHING.CORPORATE}
+              element={
+                <Layout>
+                  <CorporateCoaching />
+                </Layout>
+              }
+            />
+            {/* Speaking route */}
+            <Route
+              path={ROUTES.SPEAKING}
+              element={
+                <Layout>
+                  <Speaking />
+                </Layout>
+              }
+            />
+            {/* Maintenance and NotFound routes */}
+            <Route path={ROUTES.MAINTENANCE} element={<Maintenance />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AnimatePresence>
+      </Suspense>
+    </>
   );
 }
 

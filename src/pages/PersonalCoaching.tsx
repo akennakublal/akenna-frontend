@@ -3,16 +3,28 @@ import SEO from "../components/SEO";
 import Skeleton from "../components/Skeleton";
 import TextSection from "../components/TextSection";
 import { usePageContent } from "../hooks/usePageContent";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 function PersonalCoaching() {
   // Fetch page data for the "personal-coaching" page
   const { pageData, loading, error } = usePageContent("personal-coaching");
 
   // Loading, error, and empty state handling
-  if (loading)
+  if (loading) {
     return <Skeleton imageHeight="h-160" lines={1} className="mb-4" />;
-  if (error) return <div>Error: {error}</div>;
-  if (!pageData) return <div>No page data found.</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="p-8 text-center text-primaryBrown">
+        Error: {getErrorMessage(error)}
+      </div>
+    );
+  }
+
+  if (!pageData) {
+    return <div className="p-8 text-center">No page data found.</div>;
+  }
 
   return (
     <>

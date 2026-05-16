@@ -6,6 +6,11 @@ import { usePageContent } from "../hooks/usePageContent";
 export default function BookASession() {
   // Fetch page data for the "book-a-session" page
   const { pageData } = usePageContent("book-a-session");
+
+  if (!pageData) {
+    return <div className="p-8 text-center">No page data found.</div>;
+  }
+
   return (
     // Book section with responsive padding and background
     <section className="flex flex-col gap-8 px-16 md:px-32 xl:px-64 py-16 bg-secondaryBrown text-white">
