@@ -11,18 +11,27 @@ import { getErrorMessage } from "../utils/getErrorMessage";
 
 export default function Home() {
   // Fetch global and page data for the home page
-  const { globalData } = useGlobalContent();
-  const { pageData, loading, error } = usePageContent("home");
+  const {
+    globalData,
+    loading: globalLoading,
+    error: globalError,
+  } = useGlobalContent();
+
+  const {
+    pageData,
+    loading: pageLoading,
+    error: pageError,
+  } = usePageContent("home");
 
   // Loading, error, and empty state handling
-  if (loading) {
+  if (pageLoading || globalLoading) {
     return <Skeleton imageHeight="h-160" lines={1} className="mb-4" />;
   }
 
-  if (error) {
+  if (pageError || globalError) {
     return (
       <div className="p-8 text-center text-primaryBrown">
-        Error: {getErrorMessage(error)}
+        Error: {getErrorMessage(pageError || globalError)}
       </div>
     );
   }
