@@ -7,6 +7,7 @@ import Button from "./Button";
 import { useNavbarContent } from "../hooks/useNavbarContent";
 import Skeleton from "./Skeleton";
 import { motion } from "framer-motion";
+import { getErrorMessage } from "../utils/getErrorMessage";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -20,10 +21,21 @@ export default function Navbar() {
   }, []);
 
   // Loading, error, and empty state handling
-  if (loading)
+  if (loading) {
     return <Skeleton imageHeight="h-12" lines={1} className="mb-4" />;
-  if (error) return <div>{error}</div>;
-  if (!navbarData) return <div>No nav data</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="p-8 text-center text-primaryBrown">
+        Error: {getErrorMessage(error)}
+      </div>
+    );
+  }
+
+  if (!navbarData) {
+    return <div className="p-8 text-center">No nav data</div>;
+  }
 
   // Separate parent pages (no parent relation)
   const parents = navbarData.filter((page) => !page.parent);

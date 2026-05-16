@@ -31,7 +31,7 @@ export default function Banner({
   return (
     <motion.section
       aria-label="Event Banner"
-      initial={{ opacity: 0, y: -24 }}
+      initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, ease: "easeOut" }}
       className="z-10 relative bg-linear-to-r from-primaryBrown to-lighterNude flex flex-col md:flex-row md:px-16 px-4 py-4 justify-between items-center text-white"
@@ -49,21 +49,6 @@ export default function Banner({
           className="absolute inset-0 z-0 w-full h-full object-cover object-center opacity-60"
         />
       )}
-
-      <div className="absolute inset-0 z-1 bg-black/15" />
-
-      <motion.div
-        aria-hidden="true"
-        initial={{ x: "-120%" }}
-        animate={{ x: "120%" }}
-        transition={{
-          duration: 3.5,
-          repeat: Infinity,
-          repeatDelay: 4,
-          ease: "easeInOut",
-        }}
-        className="absolute inset-y-0 z-2 w-1/3 bg-white/10 blur-2xl rotate-12"
-      />
 
       {/* Event Name and Description */}
       <motion.div
