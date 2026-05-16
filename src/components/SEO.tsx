@@ -146,8 +146,9 @@ export default function SEO({
     setJsonLd("website-structured-data", {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
       name: "Akenna Cyrus",
-      alternateName: ["Akenna Kublal"],
+      alternateName: ["Akenna Kublal", "Akenna C. Kublal"],
       url: SITE_URL,
     });
 
@@ -155,8 +156,9 @@ export default function SEO({
     setJsonLd("person-structured-data", {
       "@context": "https://schema.org",
       "@type": "Person",
+      "@id": `${SITE_URL}/#person`,
       name: "Akenna Cyrus",
-      alternateName: "Akenna Kublal",
+      alternateName: ["Akenna Kublal", "Akenna C. Kublal"],
       url: SITE_URL,
       image: metaImageUrl || undefined,
       jobTitle: [
@@ -173,8 +175,6 @@ export default function SEO({
         "https://www.facebook.com/akpersonaldevelopment/",
         "https://www.instagram.com/akennakublal/",
         "https://www.linkedin.com/in/akenna-c-kublal-4658651b5/",
-
-
       ],
     });
 
