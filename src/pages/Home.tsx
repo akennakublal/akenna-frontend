@@ -123,7 +123,7 @@ export default function Home() {
         <EventSection
           upcomingEvents={upcomingEvents}
           title="Upcoming Events"
-          loading={loading}
+          loading={pageLoading}
         />
       )}
     </>
