@@ -20,7 +20,10 @@ export default function Banner({
     day: "numeric",
   });
 
-  const rawUrl = backgroundImage?.formats?.medium?.url;
+  const rawUrl =
+    backgroundImage?.formats?.large?.url ||
+    backgroundImage?.formats?.medium?.url ||
+    backgroundImage?.url;
   const imageUrl = rawUrl
     ? rawUrl.startsWith("http")
       ? rawUrl
@@ -36,6 +39,9 @@ export default function Banner({
       transition={{ duration: 0.7, ease: "easeOut" }}
       className="z-10 relative bg-linear-to-r from-primaryBrown to-lighterNude flex flex-col md:flex-row md:px-16 px-4 py-4 justify-between items-center text-white"
     >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 z-1 bg-black/35" />
+
       {/* Background Image */}
       {imageUrl && (
         <motion.img
@@ -46,10 +52,9 @@ export default function Banner({
           initial={{ scale: 1.08, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.6 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
-          className="absolute inset-0 z-0 w-full h-full object-cover object-center opacity-60"
+          className="absolute inset-0 z-0 w-full h-full object-cover object-center"
         />
       )}
-
       {/* Event Name and Description */}
       <motion.div
         variants={{
@@ -86,7 +91,6 @@ export default function Banner({
           {description}
         </motion.p>
       </motion.div>
-
       {/* Countdown Container */}
       <motion.div
         initial={{ opacity: 0, scale: 0.92, y: 20 }}
